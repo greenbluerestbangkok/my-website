@@ -1,35 +1,18 @@
-# Use Node.js LTS version
-FROM node:18-alpine
+# Use nginx to serve static HTML files
+FROM nginx:alpine
 
-# Set working directory
-WORKDIR /app
+# Copy the main HTML file
+COPY "Prompt Template Lab.html" /usr/share/nginx/html/index.html
 
-# Copy package files from backend directory
-COPY backend/package*.json ./
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Install dependencies
-RUN npm ci --only=production
-
-# Copy all backend files
-COPY backend/ ./
-
-# Copy HTML files from root
-COPY *.html ./
-
-# Create non-root user
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
-
-# Change ownership
-RUN chown -R nextjs:nodejs /app
-USER nextjs
-
-# Expose port
-EXPOSE 8080
+# Expose port 80
+EXPOSE 80
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:8080/api/health || exit 1
+  CMD curl -f http://localhost/ || exit 1
 
-# Start the application
-CMD ["node", "server.js"]
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
