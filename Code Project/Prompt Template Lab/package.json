@@ -1,0 +1,31 @@
+{
+  "name": "good-content",
+  "version": "1.0.0",
+  "description": "AI Content Generation Platform",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev",
+    "build": "cd backend && npm install --production",
+    "install-deps": "cd backend && npm install --production"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "ai",
+    "content",
+    "generation",
+    "gpt",
+    "gemini",
+    "stripe",
+    "mongodb"
+  ],
+  "author": "Good Content Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/good-content.git"
+  }
+}
