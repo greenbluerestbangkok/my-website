@@ -2,7 +2,10 @@
 FROM nginx:alpine
 
 # Copy the main HTML file
-COPY "Prompt Template Lab.html" /usr/share/nginx/html/index.html
+COPY "Prompt Template Lab.html" /usr/share/nginx/html/
+
+# Rename to index.html
+RUN mv "/usr/share/nginx/html/Prompt Template Lab.html" /usr/share/nginx/html/index.html
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
