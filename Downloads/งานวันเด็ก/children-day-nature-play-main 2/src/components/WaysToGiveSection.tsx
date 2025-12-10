@@ -1,4 +1,5 @@
 import { Package, Clock, Banknote, CheckCircle2 } from 'lucide-react';
+import infographicImg from '../assets/Infographic กิจกรรม.png';
 
 const cards = [
   {
@@ -38,6 +39,15 @@ const WaysToGiveSection = () => {
   return (
     <section id="ways-to-give" className="section-padding gradient-nature-bg">
       <div className="container mx-auto">
+        {/* Infographic Image */}
+        <div className="max-w-4xl mx-auto mb-8 sm:mb-12 md:mb-16 px-4">
+          <img
+            src={infographicImg}
+            alt="Infographic กิจกรรมวันเด็ก Survivor & Nature Play"
+            className="w-full h-auto rounded-2xl shadow-xl"
+          />
+        </div>
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16 px-2">
           <span className="inline-block text-secondary font-medium mb-3 sm:mb-4 text-xs sm:text-sm uppercase tracking-wider">
@@ -90,8 +100,8 @@ const WaysToGiveSection = () => {
               <button
                 onClick={() => scrollToSection('donate')}
                 className={`mt-6 sm:mt-8 w-full py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium transition-all duration-300 ${card.color === 'secondary'
-                    ? 'bg-secondary/10 text-secondary hover:bg-secondary hover:text-secondary-foreground'
-                    : 'bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground'
+                  ? 'bg-secondary/10 text-secondary hover:bg-secondary hover:text-secondary-foreground'
+                  : 'bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground'
                   }`}
               >
                 ร่วมสนับสนุน
