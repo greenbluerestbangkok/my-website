@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - สยามอารยะ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --color-cream: #F0EEED;
+      --color-green-primary: #3D8C04;
+      --color-green-dark: #327303;
+      --color-yellow: #F2CB05;
+      --color-white: #ffffff;
+      --color-text: #333333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: var(--color-cream);
+      color: var(--color-text);
+      min-height: 100vh;
+    }
+
+    .admin-header {
+      background: linear-gradient(135deg, var(--color-green-primary) 0%, var(--color-green-dark) 100%);
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-header h1 {
+      font-size: 24px;
+    }
+
+    .admin-header a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 25px;
+    }
+
+    .admin-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      background: white;
+      color: var(--color-green-primary);
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      background: var(--color-green-primary);
+      color: white;
+    }
+
+    .tab-btn:hover:not(.active) {
+      background: #e8f5e9;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .card h2 {
+      color: var(--color-green-primary);
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--color-green-primary);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-green-primary) 0%, var(--color-green-dark) 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(61, 140, 4, 0.3);
+    }
+
+    .btn-success {
+      background: #28a745;
+      color: white;
+    }
+
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+      background: var(--color-cream);
+      font-weight: 600;
+      color: var(--color-green-primary);
+    }
+
+    tr:hover {
+      background: #f9f9f9;
+    }
+
+    .badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .badge-approved {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .badge-rejected {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .voucher-code {
+      font-family: 'Courier New', monospace;
+      background: var(--color-cream);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .stat-card i {
+      font-size: 32px;
+      color: var(--color-green-primary);
+      margin-bottom: 10px;
+    }
+
+    .stat-card h3 {
+      font-size: 28px;
+      color: var(--color-text);
+      margin-bottom: 5px;
+    }
+
+    .stat-card p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .empty-state i {
+      font-size: 48px;
+      margin-bottom: 15px;
+      color: #ccc;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .voucher-display {
+      background: linear-gradient(135deg, var(--color-green-primary) 0%, var(--color-green-dark) 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 16px;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .voucher-display .code {
+      font-size: 28px;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 3px;
+      margin: 15px 0;
+    }
+
+    .voucher-display .value {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .copy-btn {
+      background: var(--color-yellow);
+      color: var(--color-green-dark);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .admin-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+
+      table {
+        font-size: 12px;
+      }
+
+      th,
+      td {
+        padding: 8px 4px;
+      }
+
+      .btn-sm {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="admin-header">
+    <h1><i class="fas fa-cog"></i> Admin Dashboard - สยามอารยะ</h1>
+    <a href="/"><i class="fas fa-home"></i> กลับหน้าหลัก</a>
+  </header>
+
+  <div class="admin-container">
+    <!-- Stats -->
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <i class="fas fa-ticket"></i>
+        <h3 id="totalVouchers">0</h3>
+        <p>Voucher ทั้งหมด</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-clock"></i>
+        <h3 id="pendingVouchers">0</h3>
+        <p>รออนุมัติ</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-users"></i>
+        <h3 id="totalMembers">0</h3>
+        <p>สมาชิก</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-shopping-cart"></i>
+        <h3 id="totalOrders">0</h3>
+        <p>คำสั่งซื้อ</p>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('vouchers')">
+        <i class="fas fa-ticket"></i> สร้าง Voucher
+      </button>
+      <button class="tab-btn" onclick="showTab('voucher-list')">
+        <i class="fas fa-list"></i> รายการ Voucher
+      </button>
+      <button class="tab-btn" onclick="showTab('members')">
+        <i class="fas fa-users"></i> สมาชิก
+      </button>
+      <button class="tab-btn" onclick="showTab('orders')">
+        <i class="fas fa-shopping-cart"></i> คำสั่งซื้อ
+      </button>
+    </div>
+
+    <!-- Tab: Create Voucher -->
+    <div id="vouchers-tab" class="tab-content active">
+      <div class="card">
+        <h2><i class="fas fa-plus-circle"></i> สร้าง Gift Voucher ใหม่</h2>
+        <form id="createVoucherForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>ชื่อผู้ซื้อ</label>
+              <input type="text" name="buyer_name" required placeholder="กรอกชื่อ-นามสกุล">
+            </div>
+            <div class="form-group">
+              <label>เบอร์โทร</label>
+              <input type="tel" name="buyer_phone" required placeholder="08x-xxx-xxxx">
+            </div>
+            <div class="form-group">
+              <label>อีเมล (ถ้ามี)</label>
+              <input type="email" name="buyer_email" placeholder="email@example.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>มูลค่า Voucher (บาท)</label>
+              <select name="purchase_amount" required>
+                <option value="">-- เลือกมูลค่า --</option>
+                <option value="100">฿100 → ได้รับ ฿120</option>
+                <option value="200">฿200 → ได้รับ ฿240</option>
+                <option value="300">฿300 → ได้รับ ฿360</option>
+                <option value="500">฿500 → ได้รับ ฿600</option>
+                <option value="1000">฿1,000 → ได้รับ ฿1,200</option>
+                <option value="1500">฿1,500 → ได้รับ ฿1,800</option>
+                <option value="2000">฿2,000 → ได้รับ ฿2,400</option>
+                <option value="2500">฿2,500 → ได้รับ ฿3,000</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-magic"></i> สร้าง Voucher Code
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tab: Voucher List -->
+    <div id="voucher-list-tab" class="tab-content">
+      <div class="card">
+        <h2><i class="fas fa-list"></i> รายการ Gift Voucher ทั้งหมด</h2>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>รหัส Voucher</th>
+                <th>ชื่อผู้ซื้อ</th>
+                <th>มูลค่าซื้อ</th>
+                <th>เครดิต</th>
+                <th>ใช้ไป</th>
+                <th>คงเหลือ</th>
+                <th>สถานะ</th>
+                <th>จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="voucherList">
+              <tr>
+                <td colspan="8" class="empty-state">
+                  <i class="fas fa-inbox"></i>
+                  <p>ยังไม่มีรายการ</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Members -->
+    <div id="members-tab" class="tab-content">
+      <div class="card">
+        <h2><i class="fas fa-users"></i> รายการสมาชิก</h2>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>ชื่อผู้ใช้</th>
+                <th>อีเมล</th>
+                <th>เบอร์โทร</th>
+                <th>สถานะสมาชิก</th>
+                <th>วันที่สมัคร</th>
+                <th>จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="memberList">
+              <tr>
+                <td colspan="7" class="empty-state">
+                  <i class="fas fa-inbox"></i>
+                  <p>ยังไม่มีสมาชิก</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pending Memberships -->
+      <div class="card">
+        <h2><i class="fas fa-clock"></i> รอการอนุมัติสมาชิก</h2>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>ชื่อผู้ใช้</th>
+                <th>อีเมล</th>
+                <th>เบอร์โทร</th>
+                <th>วันที่สมัคร</th>
+                <th>จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="pendingMemberList">
+              <tr>
+                <td colspan="5" class="empty-state">
+                  <i class="fas fa-check-circle"></i>
+                  <p>ไม่มีรายการรอการอนุมัติ</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Orders -->
+    <div id="orders-tab" class="tab-content">
+      <div class="card">
+        <h2><i class="fas fa-shopping-cart"></i> รายการคำสั่งซื้อ</h2>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>เลขที่</th>
+                <th>รายการ</th>
+                <th>ยอดรวม</th>
+                <th>สถานะชำระเงิน</th>
+                <th>สถานะคำสั่งซื้อ</th>
+                <th>วันที่</th>
+                <th>จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="orderList">
+              <tr>
+                <td colspan="7" class="empty-state">
+                  <i class="fas fa-inbox"></i>
+                  <p>ยังไม่มีคำสั่งซื้อ</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Voucher Created Modal -->
+  <div id="voucherModal" class="modal">
+    <div class="modal-content">
+      <h2><i class="fas fa-check-circle" style="color: var(--color-green-primary);"></i> สร้าง Voucher สำเร็จ!</h2>
+      <div class="voucher-display">
+        <p>รหัส Gift Voucher</p>
+        <div class="code" id="newVoucherCode">SA-69-XXXX-XXXX</div>
+        <div class="value" id="newVoucherValue">ซื้อ ฿0 → ได้รับ ฿0</div>
+        <button class="copy-btn" onclick="copyVoucherCode()">
+          <i class="fas fa-copy"></i> คัดลอกรหัส
+        </button>
+      </div>
+      <p style="text-align: center; color: #666; font-size: 14px;">
+        <i class="fas fa-info-circle"></i> กรุณาส่งรหัสนี้ให้ลูกค้า
+      </p>
+      <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="closeVoucherModal()">
+        ปิด
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    function showTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(tabName + '-tab').classList.add('active');
+      event.target.classList.add('active');
+
+      // Load data
+      if (tabName === 'voucher-list') loadVouchers();
+      if (tabName === 'members') loadMembers();
+      if (tabName === 'orders') loadOrders();
+    }
+
+    // Load stats on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStats();
+    });
+
+    // Load Statistics
+    async function loadStats() {
+      try {
+        const [vouchers, memberships, orders] = await Promise.all([
+          fetch('/api/admin/vouchers').then(r => r.json()),
+          fetch('/api/admin/memberships').then(r => r.json()),
+          fetch('/api/admin/orders').then(r => r.json())
+        ]);
+
+        document.getElementById('totalVouchers').textContent = vouchers.length;
+        document.getElementById('pendingVouchers').textContent = vouchers.filter(v => v.status === 'pending').length;
+        document.getElementById('totalMembers').textContent = memberships.length;
+        document.getElementById('totalOrders').textContent = orders.length;
+      } catch (err) {
+        console.error('Error loading stats:', err);
+      }
+    }
+
+    // Create Voucher Form
+    document.getElementById('createVoucherForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+
+      try {
+        const res = await fetch('/api/vouchers/create', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          const amount = parseFloat(formData.get('purchase_amount'));
+          document.getElementById('newVoucherCode').textContent = data.code;
+          document.getElementById('newVoucherValue').textContent = `ซื้อ ฿${amount.toLocaleString()} → ได้รับ ฿${(amount * 1.2).toLocaleString()}`;
+          document.getElementById('voucherModal').classList.add('active');
+
+          // Approve immediately
+          await fetch(`/api/admin/vouchers/${data.voucher_id}/approve`, { method: 'POST' });
+
+          e.target.reset();
+          loadStats();
+        } else {
+          alert('เกิดข้อผิดพลาด: ' + data.error);
+        }
+      } catch (err) {
+        alert('เกิดข้อผิดพลาด');
+      }
+    });
+
+    // Close voucher modal
+    function closeVoucherModal() {
+      document.getElementById('voucherModal').classList.remove('active');
+    }
+
+    // Copy voucher code
+    function copyVoucherCode() {
+      const code = document.getElementById('newVoucherCode').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        alert('คัดลอกรหัสแล้ว: ' + code);
+      });
+    }
+
+    // Load Vouchers
+    async function loadVouchers() {
+      try {
+        const res = await fetch('/api/admin/vouchers');
+        const vouchers = await res.json();
+
+        if (vouchers.length === 0) {
+          document.getElementById('voucherList').innerHTML = `
+            <tr><td colspan="8" class="empty-state"><i class="fas fa-inbox"></i><p>ยังไม่มีรายการ</p></td></tr>
+          `;
+          return;
+        }
+
+        document.getElementById('voucherList').innerHTML = vouchers.map(v => `
+          <tr>
+            <td><span class="voucher-code">${v.code}</span></td>
+            <td>${v.buyer_name || '-'}</td>
+            <td>฿${parseFloat(v.purchase_amount).toLocaleString()}</td>
+            <td>฿${parseFloat(v.credit_amount).toLocaleString()}</td>
+            <td>฿${parseFloat(v.used_amount || 0).toLocaleString()}</td>
+            <td>฿${(v.credit_amount - (v.used_amount || 0)).toLocaleString()}</td>
+            <td><span class="badge badge-${v.status}">${v.status === 'approved' ? 'อนุมัติแล้ว' : v.status === 'pending' ? 'รอตรวจสอบ' : 'ปฏิเสธ'}</span></td>
+            <td>
+              ${v.status === 'pending' ? `
+                <button class="btn btn-success btn-sm" onclick="approveVoucher(${v.id})"><i class="fas fa-check"></i></button>
+              ` : ''}
+            </td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        console.error('Error loading vouchers:', err);
+      }
+    }
+
+    // Approve Voucher
+    async function approveVoucher(id) {
+      try {
+        await fetch(`/api/admin/vouchers/${id}/approve`, { method: 'POST' });
+        loadVouchers();
+        loadStats();
+      } catch (err) {
+        alert('เกิดข้อผิดพลาด');
+      }
+    }
+
+    // Load Members
+    async function loadMembers() {
+      try {
+        const [members, pending] = await Promise.all([
+          fetch('/api/admin/members').then(r => r.json()),
+          fetch('/api/admin/memberships').then(r => r.json())
+        ]);
+
+        // All members
+        if (members.length === 0) {
+          document.getElementById('memberList').innerHTML = `
+            <tr><td colspan="7" class="empty-state"><i class="fas fa-inbox"></i><p>ยังไม่มีสมาชิก</p></td></tr>
+          `;
+        } else {
+          document.getElementById('memberList').innerHTML = members.map(m => `
+            <tr>
+              <td>${m.id}</td>
+              <td>${m.username}</td>
+              <td>${m.email || '-'}</td>
+              <td>${m.phone || '-'}</td>
+              <td><span class="badge ${m.is_member ? 'badge-approved' : 'badge-pending'}">${m.is_member ? 'สมาชิก' : 'ยังไม่สมัคร'}</span></td>
+              <td>${m.member_since || m.created_at}</td>
+              <td>
+                ${!m.is_member ? `<button class="btn btn-success btn-sm" onclick="approveMember(${m.id})"><i class="fas fa-check"></i> อนุมัติ</button>` : '-'}
+              </td>
+            </tr>
+          `).join('');
+        }
+
+        // Pending memberships
+        if (pending.length === 0) {
+          document.getElementById('pendingMemberList').innerHTML = `
+            <tr><td colspan="5" class="empty-state"><i class="fas fa-check-circle"></i><p>ไม่มีรายการรอการอนุมัติ</p></td></tr>
+          `;
+        } else {
+          document.getElementById('pendingMemberList').innerHTML = pending.map(p => `
+            <tr>
+              <td>${p.username}</td>
+              <td>${p.email || '-'}</td>
+              <td>${p.phone || '-'}</td>
+              <td>${p.created_at}</td>
+              <td>
+                <button class="btn btn-success btn-sm" onclick="approveMembership(${p.id})"><i class="fas fa-check"></i> อนุมัติ</button>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } catch (err) {
+        console.error('Error loading members:', err);
+      }
+    }
+
+    // Approve Membership
+    async function approveMembership(id) {
+      try {
+        await fetch(`/api/admin/memberships/${id}/approve`, { method: 'POST' });
+        loadMembers();
+        loadStats();
+      } catch (err) {
+        alert('เกิดข้อผิดพลาด');
+      }
+    }
+
+    // Approve Member directly
+    async function approveMember(userId) {
+      try {
+        await fetch(`/api/admin/members/${userId}/approve`, { method: 'POST' });
+        loadMembers();
+      } catch (err) {
+        alert('เกิดข้อผิดพลาด');
+      }
+    }
+
+    // Load Orders
+    async function loadOrders() {
+      try {
+        const res = await fetch('/api/admin/orders');
+        const orders = await res.json();
+
+        if (orders.length === 0) {
+          document.getElementById('orderList').innerHTML = `
+            <tr><td colspan="7" class="empty-state"><i class="fas fa-inbox"></i><p>ยังไม่มีคำสั่งซื้อ</p></td></tr>
+          `;
+          return;
+        }
+
+        document.getElementById('orderList').innerHTML = orders.map(o => `
+          <tr>
+            <td>${o.order_number}</td>
+            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">${o.items}</td>
+            <td>฿${parseFloat(o.total).toLocaleString()}</td>
+            <td><span class="badge badge-${o.payment_status === 'paid' ? 'approved' : 'pending'}">${o.payment_status === 'paid' ? 'ชำระแล้ว' : 'รอชำระ'}</span></td>
+            <td><span class="badge badge-${o.status === 'completed' ? 'approved' : 'pending'}">${o.status}</span></td>
+            <td>${o.created_at}</td>
+            <td>
+              ${o.status === 'pending' ? `
+                <button class="btn btn-success btn-sm" onclick="approveOrder(${o.id}, 'processing')"><i class="fas fa-check"></i></button>
+              ` : ''}
+            </td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        console.error('Error loading orders:', err);
+      }
+    }
+
+    // Approve Order
+    async function approveOrder(id, status) {
+      try {
+        await fetch(`/api/admin/orders/${id}/approve`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status })
+        });
+        loadOrders();
+        loadStats();
+      } catch (err) {
+        alert('เกิดข้อผิดพลาด');
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สยามอารยะ ช้อป & กิฟต์</title>
+  <!-- Google Fonts - Prompt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <a href="/" class="logo-link">
+          <img src="logo.png" alt="สยามอารยะ Logo" class="logo-img">
+          <div class="logo-text">
+            <h1>สยามอารยะ</h1>
+            <p class="tagline">SIAM ARAYA SHOP & GIFT</p>
+          </div>
+        </a>
+      </div>
+      <nav class="nav">
+        <button id="loginBtn" class="btn-secondary">เข้าสู่ระบบ</button>
+        <button id="memberBtn" class="btn-primary">สมัครสมาชิก</button>
+        <div id="userInfo" class="user-info" style="display: none;">
+          <span id="username"></span>
+          <button id="logoutBtn" class="btn-secondary">ออกจากระบบ</button>
+        </div>
+        <button class="cart-btn" onclick="showCart()">
+          <i class="fas fa-shopping-cart"></i> <span id="cartCount">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h2><i class="fas fa-gift"></i> Gift Voucher ซื้อวันนี้ เพิ่มมูลค่า 20% ทันที!</h2>
+        <p>ใช้ได้ถึง 31 มกราคม 2569 | ซื้อสินค้าสยามอารยะได้ทุกชนิด</p>
+        <button class="btn-hero" onclick="scrollToSection('voucherSection')">ซื้อ Gift Voucher เลย</button>
+      </div>
+      <div class="hero-image">
+        <img src="hero-person.png" alt="สยามอารยะ">
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Menu -->
+  <section class="quick-menu">
+    <div class="container">
+      <h3>เมนูหลัก</h3>
+      <div class="menu-grid">
+        <div class="menu-item" onclick="scrollToSection('voucherSection')">
+          <div class="icon"><i class="fas fa-ticket"></i></div>
+          <p>ซื้อ Gift Voucher</p>
+        </div>
+        <div class="menu-item" onclick="scrollToShop('tshirt')">
+          <div class="icon"><i class="fas fa-shirt"></i></div>
+          <p>เสื้อยืด SA SHOP</p>
+        </div>
+        <div class="menu-item" onclick="scrollToShop('bag')">
+          <div class="icon"><i class="fas fa-bag-shopping"></i></div>
+          <p>กระเป๋า</p>
+        </div>
+        <div class="menu-item" onclick="scrollToShop('souvenir')">
+          <div class="icon"><i class="fas fa-mug-hot"></i></div>
+          <p>ของที่ระลึก</p>
+        </div>
+        <div class="menu-item" onclick="scrollToShop('book')">
+          <div class="icon"><i class="fas fa-book"></i></div>
+          <p>หนังสือ/คอร์ส</p>
+        </div>
+        <div class="menu-item" onclick="scrollToSection('memberSection')">
+          <div class="icon"><i class="fas fa-user"></i></div>
+          <p>สมาชิก (ลด 15%)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Gallery Section -->
+  <section class="gallery-section">
+    <div class="container">
+      <h3><i class="fas fa-images"></i> แกลเลอรี่สินค้า</h3>
+      <div class="gallery-container">
+        <button class="gallery-nav prev" onclick="scrollGallery(-1)"><i class="fas fa-chevron-left"></i></button>
+        <div class="gallery-slider" id="gallerySlider">
+          <div class="gallery-item" onclick="openLightbox('/Image/2.png')">
+            <img src="/Image/2.png" alt="สินค้า 1" loading="lazy">
+          </div>
+          <div class="gallery-item" onclick="openLightbox('/Image/3.png')">
+            <img src="/Image/3.png" alt="สินค้า 2" loading="lazy">
+          </div>
+          <div class="gallery-item" onclick="openLightbox('/Image/4.png')">
+            <img src="/Image/4.png" alt="สินค้า 3" loading="lazy">
+          </div>
+          <div class="gallery-item" onclick="openLightbox('/Image/5.png')">
+            <img src="/Image/5.png" alt="สินค้า 4" loading="lazy">
+          </div>
+          <div class="gallery-item" onclick="openLightbox('/Image/6.png')">
+            <img src="/Image/6.png" alt="สินค้า 5" loading="lazy">
+          </div>
+          <div class="gallery-item" onclick="openLightbox('/Image/7.png')">
+            <img src="/Image/7.png" alt="สินค้า 6" loading="lazy">
+          </div>
+          <div class="gallery-item" onclick="openLightbox('/Image/8.png')">
+            <img src="/Image/8.png" alt="สินค้า 7" loading="lazy">
+          </div>
+          <div class="gallery-item" onclick="openLightbox('/Image/9.png')">
+            <img src="/Image/9.png" alt="สินค้า 8" loading="lazy">
+          </div>
+          <div class="gallery-item" onclick="openLightbox('/Image/10.png')">
+            <img src="/Image/10.png" alt="สินค้า 9" loading="lazy">
+          </div>
+          <div class="gallery-item" onclick="openLightbox('/Image/หนังสือ.png')">
+            <img src="/Image/หนังสือ.png" alt="หนังสือ" loading="lazy">
+          </div>
+        </div>
+        <button class="gallery-nav next" onclick="scrollGallery(1)"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <p class="gallery-hint"><i class="fas fa-hand-pointer"></i> คลิกที่รูปเพื่อดูขนาดใหญ่</p>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightboxModal" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightboxImage" src="" alt="ภาพขยาย">
+    <button class="lightbox-nav prev" onclick="event.stopPropagation(); changeLightboxImage(-1)"><i
+        class="fas fa-chevron-left"></i></button>
+    <button class="lightbox-nav next" onclick="event.stopPropagation(); changeLightboxImage(1)"><i
+        class="fas fa-chevron-right"></i></button>
+  </div>
+
+  <!-- Gift Voucher Section -->
+  <section id="voucherSection" class="section">
+    <div class="container">
+      <h2><i class="fas fa-ticket"></i> ซื้อ Gift Voucher (เพิ่มมูลค่า 20%)</h2>
+      <div class="voucher-grid">
+        <div class="voucher-card" onclick="selectVoucher(100, 120)">
+          <div class="badge">+20%</div>
+          <div class="price">฿100</div>
+          <div class="credit">ได้มูลค่า ฿120</div>
+        </div>
+        <div class="voucher-card" onclick="selectVoucher(200, 240)">
+          <div class="badge">+20%</div>
+          <div class="price">฿200</div>
+          <div class="credit">ได้มูลค่า ฿240</div>
+        </div>
+        <div class="voucher-card" onclick="selectVoucher(300, 360)">
+          <div class="badge">+20%</div>
+          <div class="price">฿300</div>
+          <div class="credit">ได้มูลค่า ฿360</div>
+        </div>
+        <div class="voucher-card" onclick="selectVoucher(500, 600)">
+          <div class="badge">+20%</div>
+          <div class="price">฿500</div>
+          <div class="credit">ได้มูลค่า ฿600</div>
+        </div>
+        <div class="voucher-card" onclick="selectVoucher(1000, 1200)">
+          <div class="badge">+20%</div>
+          <div class="price">฿1,000</div>
+          <div class="credit">ได้มูลค่า ฿1,200</div>
+        </div>
+        <div class="voucher-card" onclick="selectVoucher(1500, 1800)">
+          <div class="badge">+20%</div>
+          <div class="price">฿1,500</div>
+          <div class="credit">ได้มูลค่า ฿1,800</div>
+        </div>
+        <div class="voucher-card" onclick="selectVoucher(2000, 2400)">
+          <div class="badge">+20%</div>
+          <div class="price">฿2,000</div>
+          <div class="credit">ได้มูลค่า ฿2,400</div>
+        </div>
+        <div class="voucher-card" onclick="selectVoucher(2500, 3000)">
+          <div class="badge">+20%</div>
+          <div class="price">฿2,500</div>
+          <div class="credit">ได้มูลค่า ฿3,000</div>
+        </div>
+      </div>
+      <div class="voucher-note">
+        <p><i class="fas fa-exclamation-triangle"></i> เงื่อนไข: Gift Voucher สามารถใช้ได้ถึง 31 มกราคม 2569
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop Section -->
+  <section id="shopSection" class="section" style="display: none;">
+    <div class="container">
+      <h2><i class="fas fa-store"></i> Araya Shop</h2>
+      <div class="category-tabs">
+        <button class="tab active" onclick="filterProducts('all')">ทั้งหมด</button>
+        <button class="tab" onclick="filterProducts('tshirt')">เสื้อยืด</button>
+        <button class="tab" onclick="filterProducts('bag')">กระเป๋า</button>
+        <button class="tab" onclick="filterProducts('souvenir')">ของที่ระลึก</button>
+        <button class="tab" onclick="filterProducts('book')">หนังสือ/คอร์ส</button>
+      </div>
+      <div id="productGrid" class="product-grid"></div>
+    </div>
+  </section>
+
+  <!-- Member Section -->
+  <section id="memberSection" class="section">
+    <div class="container">
+      <h2><i class="fas fa-user-plus"></i> สมัครสมาชิกสยามอารยะ</h2>
+      <div class="member-card">
+        <h3>สิทธิประโยชน์สมาชิก</h3>
+        <ul class="benefits">
+          <li><i class="fas fa-check-circle"></i> รับส่วนลดหนังสือ Success Publisher 15%</li>
+          <li><i class="fas fa-check-circle"></i> รับส่วนลดหนังสือใหม่ 10%</li>
+          <li><i class="fas fa-check-circle"></i> โปรโมชั่นพิเศษสำหรับสมาชิกเท่านั้น</li>
+        </ul>
+        <div class="price-tag">ค่าสมัคร 50 บาท</div>
+        <button class="btn-primary" onclick="showMemberForm()">สมัครสมาชิกเลย</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-contact">
+        <p class="footer-title"><i class="fas fa-headset"></i> ติดต่อสอบถาม / แจ้งสลิป</p>
+        <p class="contact-name">อารยะก้อย</p>
+      </div>
+      <div class="footer-buttons">
+        <button class="btn-secondary" onclick="showCheckStatus()"><i class="fas fa-box"></i>
+          เช็คสถานะคำสั่งซื้อ</button>
+        <button class="btn-secondary" onclick="window.open('tel:0917973602')"><i class="fas fa-phone"></i>
+          091-797-3602</button>
+        <button class="btn-secondary" onclick="window.open('https://lin.ee/A5JHhqI', '_blank')"><i
+            class="fab fa-line"></i> แจ้งสลิป / ติดต่อ Line OA</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal: Voucher Purchase -->
+  <div id="voucherModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('voucherModal')">&times;</span>
+      <h2><i class="fas fa-gift"></i> สั่งซื้อ Gift Voucher</h2>
+
+      <div class="summary">
+        <p>ราคาซื้อ: <strong id="voucherPrice"></strong> บาท</p>
+        <p>มูลค่าที่ได้รับ: <strong id="voucherCredit"></strong> บาท</p>
+      </div>
+
+      <!-- Step 1: Contact Admin -->
+      <div class="order-step">
+        <div class="step-header">
+          <span class="step-number">1</span>
+          <h3>คัดลอกข้อความ & ติดต่อแอดมิน</h3>
+        </div>
+
+        <div class="message-template">
+          <p class="template-label"><i class="fas fa-comment-dots"></i> ข้อความสำหรับส่งแอดมิน:</p>
+          <div class="template-box" id="lineTemplate">
+            สวัสดี 🙏
+            สนใจซื้อ Gift Voucher สยามอารยะ
+            มูลค่า: <span id="templatePrice">-</span> บาท (ได้รับ <span id="templateCredit">-</span> บาท)
+
+            ชื่อ: [กรุณาระบุชื่อ]
+            เบอร์โทร: [กรุณาระบุเบอร์]
+
+            ขอบคุณ 🙏</div>
+          <button class="btn-copy" onclick="copyTemplate()">
+            <i class="fas fa-copy"></i> คัดลอกข้อความ
+          </button>
+        </div>
+
+        <a href="https://lin.ee/A5JHhqI" target="_blank" class="btn-line">
+          <i class="fab fa-line"></i> ติดต่อแอดมินทาง LINE
+        </a>
+        <p class="admin-note"><i class="fas fa-user-circle"></i> ผู้ติดต่อ: <strong>อารยะก้อย</strong> | <a
+            href="tel:0917973602">091-797-3602</a></p>
+      </div>
+
+      <!-- Step 2: Payment -->
+      <div class="order-step">
+        <div class="step-header">
+          <span class="step-number">2</span>
+          <h3>ชำระเงิน & แจ้งสลิป</h3>
+        </div>
+
+        <div class="payment-section">
+          <div class="qr-payment">
+            <img src="qr-payment.jpg" alt="QR Code PromptPay สมาคมสยามอารยะ" class="qr-code-img">
+            <p class="qr-note">Thai QR Payment / PromptPay<br><strong>สมาคมสยามอารยะ</strong></p>
+          </div>
+
+          <p class="divider-text">หรือโอนเงินผ่านบัญชี</p>
+
+          <div class="bank-details">
+            <p><i class="fas fa-university"></i> ธนาคาร: <strong>กสิกรไทย (KBank)</strong></p>
+            <p><i class="fas fa-user"></i> ชื่อบัญชี: <strong>สมาคมสยามอารยะ</strong></p>
+            <div class="account-copy">
+              <p><i class="fas fa-hashtag"></i> เลขที่บัญชี: <strong id="accountNumber">0592647984</strong></p>
+              <button class="btn-copy-small" onclick="copyAccountNumber()">
+                <i class="fas fa-copy"></i> คัดลอก
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="slip-reminder">
+          <p><i class="fas fa-camera"></i> หลังโอนเงินแล้ว กรุณาแจ้งสลิปผ่าน LINE OA</p>
+          <a href="https://lin.ee/A5JHhqI" target="_blank" class="btn-line-small">
+            <i class="fab fa-line"></i> แจ้งสลิปทาง LINE
+          </a>
+        </div>
+      </div>
+
+      <button class="btn-secondary close-modal-btn" onclick="closeModal('voucherModal')">
+        <i class="fas fa-times"></i> ปิดหน้าต่าง
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal: Product Detail -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('productModal')">&times;</span>
+      <h2 id="productName"></h2>
+      <p id="productDesc"></p>
+      <p class="price" id="productPrice"></p>
+      <div id="productOptions"></div>
+      <button class="btn-primary" onclick="addToCart()">เพิ่มลงตะกร้า</button>
+    </div>
+  </div>
+
+  <!-- Modal: Cart -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content large">
+      <span class="close" onclick="closeModal('cartModal')">&times;</span>
+      <h2><i class="fas fa-shopping-cart"></i> ตะกร้าสินค้า</h2>
+      <div id="cartItems"></div>
+      <div class="cart-summary">
+        <div class="voucher-input">
+          <input type="text" id="voucherCode" placeholder="กรอกรหัส Gift Voucher (ถ้ามี)">
+          <button class="btn-secondary" onclick="applyVoucher()">ใช้รหัส</button>
+        </div>
+        <p>ยอดรวม: <strong id="cartSubtotal">0</strong> บาท</p>
+        <p id="cartDiscount" style="display: none;">ส่วนลด: <strong id="discountAmount">0</strong> บาท</p>
+        <p class="total">ยอดชำระ: <strong id="cartTotal">0</strong> บาท</p>
+        <button class="btn-primary" onclick="checkout()">ชำระเงิน</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Checkout -->
+  <div id="checkoutModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('checkoutModal')">&times;</span>
+      <h2><i class="fas fa-credit-card"></i> ชำระเงิน</h2>
+
+      <div class="cart-total-display">
+        <p>ยอดชำระ: <strong id="checkoutTotal">0</strong> บาท</p>
+      </div>
+
+      <!-- Step 1: Contact Admin -->
+      <div class="order-step">
+        <div class="step-header">
+          <span class="step-number">1</span>
+          <h3>ติดต่อแอดมินเพื่อสั่งซื้อ</h3>
+        </div>
+
+        <div class="message-template">
+          <p class="template-label"><i class="fas fa-comment-dots"></i> ข้อความสำหรับส่งแอดมิน:</p>
+          <div class="template-box" id="checkoutTemplate">
+            สวัสดี 🙏
+            สนใจสั่งซื้อสินค้า สยามอารยะ
+
+            ชื่อ: [กรุณาระบุชื่อ]
+            เบอร์โทร: [กรุณาระบุเบอร์]
+            ที่อยู่จัดส่ง: [กรุณาระบุที่อยู่]
+
+            ขอบคุณ 🙏</div>
+          <button class="btn-copy" onclick="copyCheckoutTemplate()">
+            <i class="fas fa-copy"></i> คัดลอกข้อความ
+          </button>
+        </div>
+
+        <a href="https://lin.ee/A5JHhqI" target="_blank" class="btn-line">
+          <i class="fab fa-line"></i> ติดต่อแอดมินทาง LINE
+        </a>
+        <p class="admin-note"><i class="fas fa-user-circle"></i> ผู้ติดต่อ: <strong>อารยะก้อย</strong> | <a
+            href="tel:0917973602">091-797-3602</a></p>
+      </div>
+
+      <!-- Step 2: Payment -->
+      <div class="order-step">
+        <div class="step-header">
+          <span class="step-number">2</span>
+          <h3>ชำระเงิน & แจ้งสลิป</h3>
+        </div>
+
+        <div class="payment-section">
+          <div class="qr-payment">
+            <img src="qr-payment.jpg" alt="QR Code PromptPay สมาคมสยามอารยะ" class="qr-code-img">
+            <p class="qr-note">Thai QR Payment / PromptPay<br><strong>สมาคมสยามอารยะ</strong></p>
+          </div>
+
+          <p class="divider-text">หรือโอนเงินผ่านบัญชี</p>
+
+          <div class="bank-details">
+            <p><i class="fas fa-university"></i> ธนาคาร: <strong>กสิกรไทย (KBank)</strong></p>
+            <p><i class="fas fa-user"></i> ชื่อบัญชี: <strong>สมาคมสยามอารยะ</strong></p>
+            <div class="account-copy">
+              <p><i class="fas fa-hashtag"></i> เลขที่บัญชี: <strong id="accountNumber2">0592647984</strong></p>
+              <button class="btn-copy-small" onclick="copyAccountNumber2()">
+                <i class="fas fa-copy"></i> คัดลอก
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="slip-reminder">
+          <p><i class="fas fa-camera"></i> หลังโอนเงินแล้ว กรุณาแจ้งสลิปผ่าน LINE OA</p>
+          <a href="https://lin.ee/A5JHhqI" target="_blank" class="btn-line-small">
+            <i class="fab fa-line"></i> แจ้งสลิปทาง LINE
+          </a>
+        </div>
+      </div>
+
+      <button class="btn-secondary close-modal-btn" onclick="closeModal('checkoutModal')">
+        <i class="fas fa-times"></i> ปิดหน้าต่าง
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal: Member Registration -->
+  <div id="memberModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('memberModal')">&times;</span>
+      <h2><i class="fas fa-user-plus"></i> สมัครสมาชิก (50 บาท)</h2>
+
+      <!-- Step 1: Contact Admin -->
+      <div class="order-step">
+        <div class="step-header">
+          <span class="step-number">1</span>
+          <h3>ติดต่อแอดมินเพื่อสมัครสมาชิก</h3>
+        </div>
+
+        <div class="message-template">
+          <p class="template-label"><i class="fas fa-comment-dots"></i> ข้อความสำหรับส่งแอดมิน:</p>
+          <div class="template-box" id="memberTemplate">
+            สวัสดี 🙏
+            สนใจสมัครสมาชิก สยามอารยะ (50 บาท)
+
+            ชื่อ: [กรุณาระบุชื่อ]
+            เบอร์โทร: [กรุณาระบุเบอร์]
+            อีเมล: [กรุณาระบุอีเมล]
+
+            ขอบคุณ 🙏</div>
+          <button class="btn-copy" onclick="copyMemberTemplate()">
+            <i class="fas fa-copy"></i> คัดลอกข้อความ
+          </button>
+        </div>
+
+        <a href="https://lin.ee/A5JHhqI" target="_blank" class="btn-line">
+          <i class="fab fa-line"></i> ติดต่อแอดมินทาง LINE
+        </a>
+        <p class="admin-note"><i class="fas fa-user-circle"></i> ผู้ติดต่อ: <strong>อารยะก้อย</strong> | <a
+            href="tel:0917973602">091-797-3602</a></p>
+      </div>
+
+      <!-- Step 2: Payment -->
+      <div class="order-step">
+        <div class="step-header">
+          <span class="step-number">2</span>
+          <h3>ชำระเงิน 50 บาท & แจ้งสลิป</h3>
+        </div>
+
+        <div class="payment-section">
+          <div class="qr-payment">
+            <img src="qr-payment.jpg" alt="QR Code PromptPay สมาคมสยามอารยะ" class="qr-code-img">
+            <p class="qr-note">Thai QR Payment / PromptPay<br><strong>สมาคมสยามอารยะ</strong></p>
+          </div>
+
+          <p class="divider-text">หรือโอนเงินผ่านบัญชี</p>
+
+          <div class="bank-details">
+            <p><i class="fas fa-university"></i> ธนาคาร: <strong>กสิกรไทย (KBank)</strong></p>
+            <p><i class="fas fa-user"></i> ชื่อบัญชี: <strong>สมาคมสยามอารยะ</strong></p>
+            <div class="account-copy">
+              <p><i class="fas fa-hashtag"></i> เลขที่บัญชี: <strong id="accountNumber3">0592647984</strong></p>
+              <button class="btn-copy-small" onclick="copyAccountNumber3()">
+                <i class="fas fa-copy"></i> คัดลอก
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="slip-reminder">
+          <p><i class="fas fa-camera"></i> หลังโอนเงินแล้ว กรุณาแจ้งสลิปผ่าน LINE OA</p>
+          <a href="https://lin.ee/A5JHhqI" target="_blank" class="btn-line-small">
+            <i class="fab fa-line"></i> แจ้งสลิปทาง LINE
+          </a>
+        </div>
+      </div>
+
+      <button class="btn-secondary close-modal-btn" onclick="closeModal('memberModal')">
+        <i class="fas fa-times"></i> ปิดหน้าต่าง
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal: Login/Register -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content auth-modal">
+      <span class="close" onclick="closeModal('loginModal')">&times;</span>
+
+      <!-- Auth Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="showAuthTab('login')">เข้าสู่ระบบ</button>
+        <button class="auth-tab" onclick="showAuthTab('register')">สมัครสมาชิก</button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="loginTab" class="auth-form active">
+        <h2><i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบ</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label><i class="fas fa-phone"></i> เบอร์โทรศัพท์</label>
+            <input type="tel" name="phone" placeholder="08x-xxx-xxxx" required pattern="[0-9]{10}">
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-lock"></i> รหัสผ่าน</label>
+            <input type="password" name="password" placeholder="กรอกรหัสผ่าน" required minlength="4">
+          </div>
+          <button type="submit" class="btn-primary btn-full">
+            <i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบ
+          </button>
+        </form>
+        <div class="auth-links">
+          <a href="javascript:void(0)" onclick="showAuthTab('forgot')">
+            <i class="fas fa-key"></i> ลืมรหัสผ่าน?
+          </a>
+        </div>
+      </div>
+
+      <!-- Register Form -->
+      <div id="registerTab" class="auth-form">
+        <h2><i class="fas fa-user-plus"></i> สมัครสมาชิก</h2>
+        <form id="registerForm">
+          <div class="form-group">
+            <label><i class="fas fa-user"></i> ชื่อ-นามสกุล</label>
+            <input type="text" name="fullname" placeholder="กรอกชื่อ-นามสกุล" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-phone"></i> เบอร์โทรศัพท์</label>
+            <input type="tel" name="phone" placeholder="08x-xxx-xxxx" required pattern="[0-9]{10}">
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-envelope"></i> อีเมล (ไม่จำเป็น)</label>
+            <input type="email" name="email" placeholder="email@example.com">
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-lock"></i> ตั้งรหัสผ่าน</label>
+            <input type="password" name="password" placeholder="รหัสผ่านอย่างน้อย 4 ตัว" required minlength="4">
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-lock"></i> ยืนยันรหัสผ่าน</label>
+            <input type="password" name="confirmPassword" placeholder="กรอกรหัสผ่านอีกครั้ง" required minlength="4">
+          </div>
+          <button type="submit" class="btn-primary btn-full">
+            <i class="fas fa-user-plus"></i> สมัครสมาชิก
+          </button>
+        </form>
+        <div class="auth-links">
+          <span>มีบัญชีอยู่แล้ว?</span>
+          <a href="javascript:void(0)" onclick="showAuthTab('login')">เข้าสู่ระบบ</a>
+        </div>
+      </div>
+
+      <!-- Forgot Password Form -->
+      <div id="forgotTab" class="auth-form">
+        <h2><i class="fas fa-key"></i> ลืมรหัสผ่าน</h2>
+        <div class="forgot-info">
+          <p><i class="fas fa-info-circle"></i> กรอกเบอร์โทรที่ใช้สมัครสมาชิก แล้วติดต่อแอดมินเพื่อรีเซ็ตรหัสผ่าน</p>
+        </div>
+        <form id="forgotForm">
+          <div class="form-group">
+            <label><i class="fas fa-phone"></i> เบอร์โทรศัพท์</label>
+            <input type="tel" name="phone" placeholder="08x-xxx-xxxx" required pattern="[0-9]{10}">
+          </div>
+          <div class="message-template">
+            <p class="template-label"><i class="fas fa-comment-dots"></i> ข้อความสำหรับส่งแอดมิน:</p>
+            <div class="template-box" id="forgotTemplate">
+              สวัสดี 🙏
+              ขอรีเซ็ตรหัสผ่าน
+
+              เบอร์โทร: [กรุณาระบุเบอร์]
+              ชื่อ: [กรุณาระบุชื่อ]
+
+              ขอบคุณ 🙏</div>
+            <button type="button" class="btn-copy" onclick="copyForgotTemplate()">
+              <i class="fas fa-copy"></i> คัดลอกข้อความ
+            </button>
+          </div>
+          <a href="https://lin.ee/A5JHhqI" target="_blank" class="btn-line">
+            <i class="fab fa-line"></i> ติดต่อแอดมินทาง LINE
+          </a>
+        </form>
+        <div class="auth-links">
+          <a href="javascript:void(0)" onclick="showAuthTab('login')">
+            <i class="fas fa-arrow-left"></i> กลับไปเข้าสู่ระบบ
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Check Order Status -->
+  <div id="checkStatusModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('checkStatusModal')">&times;</span>
+      <h2><i class="fas fa-box"></i> เช็คสถานะคำสั่งซื้อ</h2>
+
+      <div class="status-info">
+        <p class="status-desc"><i class="fas fa-info-circle"></i> ส่งข้อความด้านล่างไปยัง LINE OA
+          เพื่อสอบถามสถานะคำสั่งซื้อ</p>
+      </div>
+
+      <div class="message-template">
+        <p class="template-label"><i class="fas fa-comment-dots"></i> ข้อความสำหรับถามสถานะ:</p>
+        <div class="template-box" id="statusTemplate">
+          สวัสดี 🙏
+          ขอสอบถามสถานะคำสั่งซื้อ
+
+          ชื่อ: [กรุณาระบุชื่อ]
+          เบอร์โทร: [กรุณาระบุเบอร์]
+          วันที่สั่งซื้อ: [กรุณาระบุวันที่]
+          สินค้าที่สั่ง: [กรุณาระบุสินค้า]
+
+          ขอบคุณ 🙏</div>
+        <button class="btn-copy" onclick="copyStatusTemplate()">
+          <i class="fas fa-copy"></i> คัดลอกข้อความ
+        </button>
+      </div>
+
+      <a href="https://lin.ee/A5JHhqI" target="_blank" class="btn-line">
+        <i class="fab fa-line"></i> ติดต่อแอดมินทาง LINE
+      </a>
+      <p class="admin-note"><i class="fas fa-user-circle"></i> ผู้ติดต่อ: <strong>อารยะก้อย</strong> | <a
+          href="tel:0917973602">091-797-3602</a></p>
+
+      <button class="btn-secondary close-modal-btn" onclick="closeModal('checkStatusModal')">
+        <i class="fas fa-times"></i> ปิดหน้าต่าง
+      </button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
